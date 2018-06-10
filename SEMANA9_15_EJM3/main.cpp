@@ -67,14 +67,22 @@ void imprimirMatrizInferiorDiagonal(float **M, int FIL, int COL) {
     }
 }
 
-int sumatoriaColumnaMatriz(float **M, int FIL, int COL) {
+int sumaMatrizInferiorDiagonal(float **M, int FIL, int COL) {
     int sumatoria = 0;
     for(int i = 0; i < FIL; i++) {
         for(int j = 0; j < COL; j++) {
-            if (j == 3) {
+            if ( j < i) {
                 sumatoria = sumatoria + M[i][j];
             }
         }
+    }
+    return sumatoria;
+}
+
+int sumatoriaColumnaMatriz(float **M, int FIL, int COL, int c) {
+    int sumatoria = 0;
+    for(int i = 0; i < FIL; i++) {
+        sumatoria = sumatoria + M[i][c];
     }
     return sumatoria;
 }
@@ -117,7 +125,11 @@ int main()
     cout << "\n";
     cout << "sumatoria de la columan 4" << endl;
     cout << "\n";
-    cout << sumatoriaColumnaMatriz(M, 8, 8) << endl;
+    cout << sumatoriaColumnaMatriz(M, 8, 8, 3) << endl;
+    cout << "\n";
+    cout << "sumatoria por debajo de la diagonal " << endl;
+    cout << "\n";
+    cout << sumaMatrizInferiorDiagonal(M, 8, 8) << endl;
 
     return 0;
 
