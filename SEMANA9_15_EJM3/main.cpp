@@ -16,6 +16,69 @@ void imprimirMatriz(float **M, int FIL, int COL) {
     }
 }
 
+void imprimirMatrizDiagonal(float **M, int FIL, int COL) {
+    for(int i = 0; i < FIL; i++) {
+        for(int j = 0; j < COL; j++) {
+            if (i == j) {
+                cout << M[i][j] << "\t";
+            } else {
+                cout << " - " << "\t";
+            }
+        }
+        cout << endl;
+    }
+}
+
+int sumaMatrizDiagonal(float **M, int FIL, int COL) {
+    int sumatoria = 0;
+    for(int i = 0; i < FIL; i++) {
+        for(int j = 0; j < COL; j++) {
+            if (i == j) {
+                sumatoria = sumatoria + M[i][j];
+            }
+        }
+    }
+    return sumatoria;
+}
+
+void imprimirMatrizSuperiorDiagonal(float **M, int FIL, int COL) {
+    for(int i = 0; i < FIL; i++) {
+        for(int j = 0; j < COL; j++) {
+            if ( j > i) {
+                cout << M[i][j] << "\t";
+            } else {
+                cout << " - " << "\t";
+            }
+        }
+        cout << endl;
+    }
+}
+
+void imprimirMatrizInferiorDiagonal(float **M, int FIL, int COL) {
+    for(int i = 0; i < FIL; i++) {
+        for(int j = 0; j < COL; j++) {
+            if ( j < i) {
+                cout << M[i][j] << "\t";
+            } else {
+                cout << " - " << "\t";
+            }
+        }
+        cout << endl;
+    }
+}
+
+int sumatoriaColumnaMatriz(float **M, int FIL, int COL) {
+    int sumatoria = 0;
+    for(int i = 0; i < FIL; i++) {
+        for(int j = 0; j < COL; j++) {
+            if (j == 3) {
+                sumatoria = sumatoria + M[i][j];
+            }
+        }
+    }
+    return sumatoria;
+}
+
 int main()
 {
 
@@ -33,6 +96,28 @@ int main()
     }
 
     imprimirMatriz(M, 8, 8);
+
+    cout << "\n";
+    cout << "Imprimir la diagonal" << endl;
+    cout << "\n";
+    imprimirMatrizDiagonal(M, 8, 8);
+    cout << "\n";
+    cout << "sumatoria de la diagonal" << endl;
+    cout << "\n";
+    cout << sumaMatrizDiagonal(M, 8, 8);
+    cout << "\n";
+    cout << "\n";
+    cout << "por encima de la diagonal" << endl;
+    cout << "\n";
+    imprimirMatrizSuperiorDiagonal(M, 8, 8);
+    cout << "\n";
+    cout << "por debajo de la diagonal" << endl;
+    cout << "\n";
+    imprimirMatrizInferiorDiagonal(M, 8, 8);
+    cout << "\n";
+    cout << "sumatoria de la columan 4" << endl;
+    cout << "\n";
+    cout << sumatoriaColumnaMatriz(M, 8, 8) << endl;
 
     return 0;
 
