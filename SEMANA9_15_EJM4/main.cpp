@@ -11,6 +11,33 @@ void imprimirMatriz(float M[9][13], int FIL, int COL) {
     }
 }
 
+float tempPromedioSetiembre(float M[9][13], int FIL, int COL) {
+    float promedio = 0;
+    for(int i = 0; i < FIL; i++) {
+        for(int j = 0; j < COL; j++) {
+            if (j == 8 && i < 8) {
+                promedio = promedio + M[i][8];
+            }
+        }
+    }
+    return promedio / 8;
+}
+
+float mayorTempEstacion3(float M[9][13], int FIL, int COL) {
+    float promedio = 0;
+    for(int i = 0; i < FIL; i++) {
+        for(int j = 0; j < COL; j++) {
+            if (i == 3 && i < 12) {
+                if (M[3][j] > promedio) {
+                    promedio = M[3][j];
+                }
+            }
+        }
+    }
+    return promedio;
+}
+
+
 void imprimirMatrizPromedio(float M[9][13], int FIL, int COL) {
 
     float pcol0 = 0;
@@ -35,8 +62,16 @@ void imprimirMatrizPromedio(float M[9][13], int FIL, int COL) {
     float prow10 = 0;
     float prow11 = 0;
 
+    float menortemp = M[0][0];
+    int mestemp = 0;
+
     for(int i = 0; i < FIL; i++) {
         for(int j = 0; j < COL; j++) {
+
+            if (menortemp > M[i][j] && j < 12 && i < 8) {
+                menortemp = M[i][j];
+                mestemp = j;
+            }
 
             if(i == 0 && j < 12) {
                 pcol0 = pcol0 + M[0][j];
@@ -125,6 +160,38 @@ void imprimirMatrizPromedio(float M[9][13], int FIL, int COL) {
         }
         cout << endl;
     }
+
+    string meses[12] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"};
+
+    cout << "\n";
+
+    cout << "La menor Temperatura es: " << menortemp << " Mes: " << meses[mestemp];
+
+    float menor = M[8][0];
+    float mayor = M[8][0];
+
+    int mes = 0;
+    int mesmayor = 0;
+    for (int i = 0; i < 12; i++) {
+        if (menor > M[8][i]) {
+            menor = M[8][i];
+            mes = i;
+        }
+        if (mayor < M[8][i]) {
+            mayor = M[8][i];
+            mesmayor = i;
+        }
+    }
+
+    cout << "\n";
+
+    cout << "Promedio minimo: " << menor << " Mes: " << meses[mes];
+
+    cout << "\n";
+
+    cout << "Promedio mayor: " << mayor << " Mes: " << meses[mesmayor];
+
 }
 
 // EJERCICIO 2
@@ -148,6 +215,16 @@ int main()
     cout << "\n";
 
     imprimirMatrizPromedio(M, 9, 13);
+
+    cout << "\n";
+
+    cout << "Promedio de Temperatura Setiemebre: " << tempPromedioSetiembre(M, 9, 13);
+
+    cout << "\n";
+
+    cout << "Mayor temperatura registrada en la estacion 3: " << mayorTempEstacion3(M, 9, 13);
+
+    cout << "\n";
 
     return 0;
 }
